@@ -145,6 +145,8 @@
     .price-row{ display:flex; align-items:center; justify-content:center; gap:8px }
     .retail-price{ text-decoration:line-through; color:#999; font-size:14px }
     .savings{ color:#16a34a; font-weight:700; font-size:13px }
+    .sold-out{ color:#e11d48; font-weight:700; margin-top:8px }
+    .sold-alert{ color:#e11d48; font-weight:700; margin-top:8px }
   </style>
 </head>
 <body>
@@ -152,74 +154,75 @@
     <img src="image/Logo.jpg" width="200" alt="Logo">
     <nav>
     <h1>Welcome to My Shop</h1> 
-    <p>If you find anything interesting that you want to purchase, please email Som: shanavsundeep1@gmail.com</p>
+    <p>If you find anything interesting that you want to purchase, please email Som: somsays.shopping@gmail.com</p>
     </nav>
     </header>
   <section class="products">
-    <div class="product-card">
+    <div class="product-card" data-no-retail="true" data-soldout="true">
       <img src="image/Wallets.jpeg" alt="White and Black Wallet" />
-<h2>White and Black Wallet with Chain</h2>
+<h2>White and black crossbody bag with Chain</h2>
       <p class="description">White Wallet is $110 and the Black Wallet is $110</p>
       <p class="price">$110 Each</p>
       <button class="add-to-cart">Add to Cart</button>
+      <p class="sold-out">Sold out</p>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="150">
       <img src="image/toryearrings.jpeg" alt="Tory Burch Earrings" />
       <h2>Tory Burch Earrings</h2>
       <p class="description">Tory Burch Earrings</p>
       <p class="price">$55</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="98">
     <img src="image/bag.jpeg" alt="Black Tote Bag" />
       <h2>Black Tote Bag</h2>
       <p class="description">Spacious tote bag with gold details</p>
       <p class="price">$30</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="59">
       <img src="image/watch.jpeg" alt="Watch Set" />
       <h2>Watch & Bracelet Set</h2>
       <p class="description">Watch with matching accessories</p>
       <p class="price">$30</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="150">
       <img src="image/greentoryearrings.jpeg" alt="Green Tory Earrings" />
       <h2>Pink Flower Earrings</h2>
       <p class="description">Green Tory Burch Earrings</p>
       <p class="price">$55</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="200">
       <img src="image/Braclet.jpeg" alt="Gold Bracelet" />
       <h2>Gold Bracelet</h2>
       <p class="description">Elegant gold-tone Tory Burch bracelet</p>
       <p class="price">$85</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="135">
       <img src="image/DKNY.jpeg" alt="" />
       <h2>DKNY Bag</h2>
       <p class="description">DKNY bag with a nice chain and the color is grey</p>
       <p class="price">$50</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-    <div class="product-card">
+    <div class="product-card" data-retail="85">
       <img src="image/floral.jpeg" alt="Flower Earrings" />
       <h2>Flower Earing</h2>
       <p class="description">Floral Tory Burch earrings</p>
       <p class="price">$40</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-     <div class="product-card">
+     <div class="product-card" data-retail="200">
       <img src="image/MKbag.jpeg" alt="MKbag" />
       <h2>MKbag</h2>
       <p class="description">Michael Kors Bag with the chain</p>
       <p class="price">$95</p>
       <button class="add-to-cart">Add to Cart</button>
     </div>
-      <div class="product-card">
+      <div class="product-card" data-retail="23">
       <img src="image/Copper.jpeg" alt="Copper Earrings" />
       <h2>Copper Earrings</h2>
       <p class="description">100 percent Copper Earrings from 1987 export from Paris</p>
@@ -261,17 +264,20 @@
       <p class="price">$20</p>
       <button class="add-to-cart">Add to Cart</button>
       </div>
-       <div class="product-card">
-      <img src="image/ToryBurchBag.jpeg" alt="Bag" />
-      <h2>Tory Burch Bag </h2>
-      <p class="price">$110</p>
-      <button class="add-to-cart">Add to Cart</button>
-      </div>
+      <div class="product-card" data-retail="310">
+          <img src="image/ToryBurchBag.jpeg" alt="Bag" />
+          <h2>Tory Burch Bag </h2>
+          <br>
+          <br>
+          <br>
+          <p class="price">$110</p>
+          <button class="add-to-cart">Add to Cart</button>
+          </div>
   </section>
   <footer class="footer">
-    <p>If you are interested to purchase, please email Som: shanavsundeep1@gmail.com</p>
+    <p>If you are interested to purchase, please email Som: somsays.shopping@gmail.com</p>
     <p>Additional shipping costs apply</p>
-    <a href="https://www.instagram.com/shopwithsom" style="color: yellow;">FOLLOW US ON INSTAGRAM</a>
+    <a href="https://www.instagram.com/shopwithsom" style="color: yellow;">FOLLOW US</a>
   </footer>
   <!-- Cart button and drawer -->
   <div class="cart-button" id="cartButton" aria-label="Open cart">
@@ -319,13 +325,16 @@
       return Math.round(price * 1.25 * 100) / 100; // default: 25% higher than sale price
     }
 
-    // Insert retail price into each product card UI
+    // Insert retail price into each product card UI (skip items marked data-no-retail)
     document.querySelectorAll('.product-card').forEach(card => {
       const priceEl = card.querySelector('.price');
       if(!priceEl) return;
       const raw = priceEl.innerText || '';
       const price = getPriceFromText(raw);
-      const retail = computeRetail(price);
+      const noRetail = card.hasAttribute('data-no-retail');
+      if(noRetail) return; // leave plain price for items without retail
+      const retailAttr = card.getAttribute('data-retail');
+      const retail = retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price);
       // build price row if not already built
       if(!card.querySelector('.price-row')){
         const wrapper = document.createElement('div');
@@ -354,12 +363,21 @@
       let totalSavings = 0;
       cart.forEach((it, i) => {
         total += it.price;
-        const retail = (typeof it.retail === 'number' && it.retail > 0) ? it.retail : computeRetail(it.price);
-        const saving = Math.round((retail - it.price) * 100) / 100;
-        totalSavings += saving;
+        const noRetail = !!it.noRetail;
+        let retail = 0;
+        let saving = 0;
+        if(!noRetail){
+          retail = (typeof it.retail === 'number' && it.retail > 0) ? it.retail : computeRetail(it.price);
+          saving = Math.round((retail - it.price) * 100) / 100;
+          totalSavings += saving;
+        }
         const row = document.createElement('div');
         row.className = 'cart-item';
-        row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="retail-price">${formatPrice(retail)}</span>\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n            <p class=\"savings\">You save ${formatPrice(saving)}</p>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        if(noRetail){
+          row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        } else {
+          row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="retail-price">${formatPrice(retail)}</span>\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n            <p class=\"savings\">You save ${formatPrice(saving)}</p>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        }
         itemsEl.appendChild(row);
       });
       totalEl.textContent = formatPrice(total);
@@ -391,14 +409,29 @@
       btn.addEventListener('click', (e) => {
         const card = e.currentTarget.closest('.product-card');
         if(!card) return;
+        // if item is marked sold out, show alert and a temporary inline tag and do not add
+        const soldOut = card.hasAttribute('data-soldout');
+        if(soldOut){
+          alert('This item is sold out and cannot be added to the cart.');
+          // show a temporary inline alert tag if not already present
+          if(!card.querySelector('.sold-alert')){
+            const note = document.createElement('div');
+            note.className = 'sold-alert';
+            note.textContent = 'Sold out — cannot add to cart';
+            card.appendChild(note);
+            setTimeout(() => { if(note.parentNode) note.parentNode.removeChild(note); }, 3000);
+          }
+          return;
+        }
         const title = card.querySelector('h2')?.innerText?.trim() || 'Item';
         const priceText = card.querySelector('.price')?.innerText || '';
         const price = getPriceFromText(priceText);
         const img = card.querySelector('img')?.getAttribute('src') || '';
         // allow manual retail override via data-retail attribute on card
+        const noRetail = card.hasAttribute('data-no-retail');
         const retailAttr = card.getAttribute('data-retail');
-        const retail = retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price);
-        cart.push({ title, price, img, retail });
+        const retail = noRetail ? undefined : (retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price));
+        cart.push({ title, price, img, retail, noRetail });
         save();
         renderCart();
         const orig = e.currentTarget.innerText;
@@ -412,7 +445,7 @@
     if(checkoutBtn){
       checkoutBtn.addEventListener('click', () => {
         if(cart.length === 0){ alert('Your cart is empty'); return; }
-        alert('email shanavsundeep1@gmail.com');
+        alert('email somsays.shopping@gmail.com');
       });
     }
 
@@ -451,4 +484,3 @@
   </script>
 </body>
 </html>
-
