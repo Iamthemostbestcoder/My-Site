@@ -12,7 +12,7 @@
       background: linear-gradient(180deg, #f0f4ff, #ffffff);
     }
 
-    /* Header */
+  
     .header {
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
@@ -24,7 +24,6 @@
       margin-bottom: 10px;
     }
 
-    /* Products Section */
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -33,7 +32,6 @@
       padding: 30px;
     }
 
-    /* Product Card */
     .product-card {
       background-color: white;
       width: 260px;
@@ -49,21 +47,14 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
     }
 
-    /* Images */
     .product-card img {
       width: 100%;
       height: 260px;
       object-fit: cover;
       border-radius: 12px;
       cursor: pointer;
-      transition: opacity 0.3s;
     }
 
-    .product-card img:hover {
-      opacity: 0.9;
-    }
-
-    /* Text */
     .product-card h2 {
       font-size: 18px;
       margin: 10px 0;
@@ -81,7 +72,6 @@
       margin: 10px 0;
     }
 
-    /* Button */
     button {
       background: linear-gradient(135deg, #ff6a00, #ee0979);
       color: white;
@@ -100,73 +90,61 @@
       background: linear-gradient(135deg, #764ba2, #667eea);
       color: white;
     }
-
-    /* Image Modal Styles */
-    .image-modal {
-      display: none;
+    /* Cart styles */
+    .cart-button {
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      animation: fadeIn 0.3s;
-    }
-
-    .image-modal.active {
+      right: 20px;
+      bottom: 30px;
+      background: linear-gradient(135deg,#ff6a00,#ee0979);
+      color: white;
+      border-radius: 50px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 10px;
+      z-index: 1200;
     }
-
-    .modal-content {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      border-radius: 8px;
-      animation: zoomIn 0.3s;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: #f1f1f1;
-      font-size: 40px;
+    .cart-count {
+      background: #fff;
+      color: #333;
+      border-radius: 12px;
+      padding: 4px 8px;
       font-weight: bold;
-      cursor: pointer;
-      transition: color 0.3s;
+      font-size: 13px;
     }
-
-    .close-modal:hover {
-      color: #fff;
+    .cart-drawer {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 360px;
+      max-width: 95vw;
+      background: linear-gradient(180deg,#ffffff,#f7f9ff);
+      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+      transform: translateX(100%);
+      transition: transform 0.35s ease;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* Prevent body scroll when modal is open */
-    body.modal-open {
-      overflow: hidden;
-    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .cart-items { overflow:auto; flex:1; padding-right:6px; }
+    .cart-item { display:flex; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid #eef2ff; }
+    .cart-item img{ width:64px; height:64px; object-fit:cover; border-radius:8px; }
+    .cart-item .meta{ flex:1; }
+    .cart-item .meta h4{ margin:0; font-size:14px; }
+    .cart-item .meta p{ margin:4px 0 0; color:#666; font-size:13px }
+    .cart-footer{ padding-top:10px; border-top:1px dashed #e6e9ff; }
+    .btn-continue{ width:100%; background:#667eea; color:white; border:none; padding:12px; border-radius:8px; font-weight:600; cursor:pointer; }
+    .btn-small{ background:transparent; border:none; color:#667eea; cursor:pointer; }
+    /* Retail and savings */
+    .price-row{ display:flex; align-items:center; justify-content:center; gap:8px }
+    .retail-price{ text-decoration:line-through; color:#999; font-size:14px }
+    .savings{ color:#16a34a; font-weight:700; font-size:13px }
   </style>
 </head>
 <body>
@@ -179,112 +157,115 @@
     </header>
   <section class="products">
     <div class="product-card">
-      <img src="image/Wallets.jpeg" alt="White and Black Wallet" onclick="openImageModal(this)" />
+      <img src="image/Wallets.jpeg" alt="White and Black Wallet" />
 <h2>White and Black Wallet with Chain</h2>
       <p class="description">White Wallet is $110 and the Black Wallet is $110</p>
       <p class="price">$110 Each</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/toryearrings.jpeg" alt="Tory Burch Earrings" onclick="openImageModal(this)" />
+      <img src="image/toryearrings.jpeg" alt="Tory Burch Earrings" />
       <h2>Tory Burch Earrings</h2>
+      <p class="description">Tory Burch Earrings</p>
       <p class="price">$55</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-    <img src="image/bag.jpeg" alt="Black Tote Bag" onclick="openImageModal(this)" />
+    <img src="image/bag.jpeg" alt="Black Tote Bag" />
       <h2>Black Tote Bag</h2>
       <p class="description">Spacious tote bag with gold details</p>
       <p class="price">$30</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/watch.jpeg" alt="Watch Set" onclick="openImageModal(this)" />
+      <img src="image/watch.jpeg" alt="Watch Set" />
       <h2>Watch & Bracelet Set</h2>
       <p class="description">Watch with matching accessories</p>
       <p class="price">$30</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/greentoryearrings.jpeg" alt="Green Tory Earrings" onclick="openImageModal(this)" />
-      <h2>Green Tory Burch Earrings</h2>
-      <p class="description">Green elegant Earrings</p>
+      <img src="image/greentoryearrings.jpeg" alt="Green Tory Earrings" />
+      <h2>Pink Flower Earrings</h2>
+      <p class="description">Green Tory Burch Earrings</p>
       <p class="price">$55</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/Braclet.jpeg" alt="Gold Bracelet" onclick="openImageModal(this)" />
+      <img src="image/Braclet.jpeg" alt="Gold Bracelet" />
       <h2>Gold Bracelet</h2>
-      <p class="description">Elegant gold tone Tory Burch bracelet</p>
+      <p class="description">Elegant gold-tone Tory Burch bracelet</p>
       <p class="price">$85</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/DKNY.jpeg" alt="" onclick="openImageModal(this)" />
+      <img src="image/DKNY.jpeg" alt="" />
       <h2>DKNY Bag</h2>
       <p class="description">DKNY bag with a nice chain and the color is grey</p>
       <p class="price">$50</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
-      <img src="image/floral.jpeg" alt="Flower Earrings" onclick="openImageModal(this)" />
-      <h2>Kate Spade Flower Earring</h2>
+      <img src="image/floral.jpeg" alt="Flower Earrings" />
+      <h2>Flower Earing</h2>
+      <p class="description">Floral Tory Burch earrings</p>
       <p class="price">$40</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
-       <div class="product-card">
+     <div class="product-card">
       <img src="image/MKbag.jpeg" alt="MKbag" />
-      <h2>MK bag</h2>
+      <h2>MKbag</h2>
       <p class="description">Michael Kors Bag with the chain</p>
       <p class="price">$95</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
       <div class="product-card">
       <img src="image/Copper.jpeg" alt="Copper Earrings" />
       <h2>Copper Earrings</h2>
       <p class="description">100 percent Copper Earrings from 1987 export from Paris</p>
       <p class="price">$15</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="image/Brushes.jpeg" alt="Brushes" />
-      <h2> YSL Makeup Brushes</h2>
+      <h2>Brushes</h2>
+      <p class="description">YSL Makeup Brushes</p>
       <p class="price">$45</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="image/UglyEarrings.jpeg" alt="Earrings" />
       <h2>Earrings</h2>
       <p class="description">Pretty Earrings</p>
       <p class="price">$25</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
       <div class="product-card">
       <img src="image/ZaraDress.jpeg" alt="Zara" />
-      <h2>Zara Dress</h2>
+      <h2>Zara</h2>
       <p class="description">Pretty Dress from Zara</p>
       <p class="price">$45</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="image/BlueDress.jpeg" alt="BlueDress" />
-      <h2>Blue beuatiful dress</h2>
+      <h2>BlueDress</h2>
       <p class="description">Blue Dress from EB luxe Los Angeles</p>
       <p class="price">$85</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
     <div class="product-card">
       <img src="image/Shoes.jpeg" alt="Shoes" />
       <h2>Shoes</h2>
       <p class="description">Size 7 Shoes</p>
       <p class="price">$20</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
       </div>
-      <div class="product-card">
+       <div class="product-card">
       <img src="image/ToryBurchBag.jpeg" alt="Bag" />
       <h2>Tory Burch Bag </h2>
       <p class="price">$110</p>
-      <button onclick="contact()">Email to Buy</button>
+      <button class="add-to-cart">Add to Cart</button>
       </div>
   </section>
   <footer class="footer">
@@ -292,64 +273,181 @@
     <p>Additional shipping costs apply</p>
     <a href="https://www.instagram.com/shopwithsom" style="color: yellow;">FOLLOW US</a>
   </footer>
+  <!-- Cart button and drawer -->
+  <div class="cart-button" id="cartButton" aria-label="Open cart">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6h15l-1.5 9h-11L6 6z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div>Cart</div>
+    <div class="cart-count" id="cartCount">0</div>
+  </div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <button class="btn-small" id="closeCart">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <p style="margin:8px 0;">Total: <strong id="cartTotal">$0.00</strong></p>
+      <p style="margin:6px 0;">You save: <strong id="cartSavings">$0.00</strong></p>
+      <button class="btn-continue" id="checkoutBtn">Continue to Purchase</button>
+    </div>
+  </aside>
 
-  <!-- Image Modal -->
-  <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
-    <span class="close-modal">&times;</span>
-    <img class="modal-content" id="modalImage" />
+  <!-- Lightbox markup -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightboxClose" class="btn-small" aria-label="Close image" title="Close">✕</button>
+    <img id="lightboxImg" src="" alt="" />
   </div>
 
+  <style>
+    .lightbox{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:1300 }
+    .lightbox.open{ opacity:1; pointer-events:auto }
+    .lightbox img{ max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 18px 50px rgba(0,0,0,0.6); }
+    #lightboxClose{ position:fixed; right:22px; top:18px; background:transparent; color:#fff; border:0; font-size:20px; cursor:pointer }
+  </style>
+
   <script>
-    function contact() {
-      alert("If you are interested, please email Som: somsays.shopping@gmail.com");
+  (function(){
+    const CART_KEY = 'shopping_site_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    function save() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function formatPrice(n){ return '$' + n.toFixed(2); }
+    function getPriceFromText(text){ return parseFloat((text||'').replace(/[^0-9.]/g,'')) || 0; }
+
+    function computeRetail(price){
+      // If we later add real retail lookup results to the product element (data-retail), code can use that.
+      return Math.round(price * 1.25 * 100) / 100; // default: 25% higher than sale price
     }
 
-    function openImageModal(img) {
-      const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImage");
-      
-      modal.classList.add("active");
-      modalImg.src = img.src;
-      modalImg.alt = img.alt;
-      document.body.classList.add("modal-open");
-    }
-
-    function closeImageModal(event) {
-      const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImage");
-      
-      // Close if clicking on the overlay or close button, but not on the image itself
-      if (event.target === modal || event.target.classList.contains("close-modal")) {
-        modal.classList.remove("active");
-        document.body.classList.remove("modal-open");
-        // Clear the image source after animation
-        setTimeout(() => {
-          modalImg.src = "";
-        }, 300);
-      }
-    }
-
-    // Close modal on ESC key press
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") {
-        const modal = document.getElementById("imageModal");
-        if (modal.classList.contains("active")) {
-          modal.classList.remove("active");
-          document.body.classList.remove("modal-open");
-          const modalImg = document.getElementById("modalImage");
-          setTimeout(() => {
-            modalImg.src = "";
-          }, 300);
-        }
+    // Insert retail price into each product card UI
+    document.querySelectorAll('.product-card').forEach(card => {
+      const priceEl = card.querySelector('.price');
+      if(!priceEl) return;
+      const raw = priceEl.innerText || '';
+      const price = getPriceFromText(raw);
+      const retail = computeRetail(price);
+      // build price row if not already built
+      if(!card.querySelector('.price-row')){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'price-row';
+        const retailSpan = document.createElement('span');
+        retailSpan.className = 'retail-price';
+        retailSpan.textContent = formatPrice(retail);
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'price';
+        priceSpan.textContent = raw;
+        wrapper.appendChild(retailSpan);
+        wrapper.appendChild(priceSpan);
+        priceEl.replaceWith(wrapper);
       }
     });
+
+    function renderCart(){
+      const countEl = document.getElementById('cartCount');
+      const itemsEl = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+      const savingsEl = document.getElementById('cartSavings');
+      if(!countEl || !itemsEl || !totalEl) return;
+      countEl.textContent = String(cart.length);
+      itemsEl.innerHTML = '';
+      let total = 0;
+      let totalSavings = 0;
+      cart.forEach((it, i) => {
+        total += it.price;
+        const retail = (typeof it.retail === 'number' && it.retail > 0) ? it.retail : computeRetail(it.price);
+        const saving = Math.round((retail - it.price) * 100) / 100;
+        totalSavings += saving;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="retail-price">${formatPrice(retail)}</span>\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n            <p class=\"savings\">You save ${formatPrice(saving)}</p>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        itemsEl.appendChild(row);
+      });
+      totalEl.textContent = formatPrice(total);
+      if(savingsEl) savingsEl.textContent = formatPrice(totalSavings);
+      itemsEl.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = Number(e.currentTarget.dataset.index);
+          if (!isNaN(idx)) { cart.splice(idx,1); save(); renderCart(); }
+        });
+      });
+    }
+
+    // Toggle drawer
+    const cartButton = document.getElementById('cartButton');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const closeCart = document.getElementById('closeCart');
+    if(cartButton && cartDrawer){
+      cartButton.addEventListener('click', () => {
+        cartDrawer.classList.toggle('open');
+        cartDrawer.setAttribute('aria-hidden', String(!cartDrawer.classList.contains('open')));
+      });
+    }
+    if(closeCart && cartDrawer){
+      closeCart.addEventListener('click', () => { cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); });
+    }
+
+    // Add-to-cart buttons
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.currentTarget.closest('.product-card');
+        if(!card) return;
+        const title = card.querySelector('h2')?.innerText?.trim() || 'Item';
+        const priceText = card.querySelector('.price')?.innerText || '';
+        const price = getPriceFromText(priceText);
+        const img = card.querySelector('img')?.getAttribute('src') || '';
+        // allow manual retail override via data-retail attribute on card
+        const retailAttr = card.getAttribute('data-retail');
+        const retail = retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price);
+        cart.push({ title, price, img, retail });
+        save();
+        renderCart();
+        const orig = e.currentTarget.innerText;
+        e.currentTarget.innerText = 'Added ✓';
+        setTimeout(()=> e.currentTarget.innerText = orig, 1000);
+      });
+    });
+
+    // Checkout -> mailto with items and total
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if(checkoutBtn){
+      checkoutBtn.addEventListener('click', () => {
+        if(cart.length === 0){ alert('Your cart is empty'); return; }
+        alert('email shanavsundeep1@gmail.com');
+      });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt){
+      if(!lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeLightbox(){
+      if(!lightbox) return;
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      lightboxImg.src = '';
+      document.removeEventListener('keydown', onKeydown);
+    }
+    function onKeydown(e){ if(e.key === 'Escape') closeLightbox(); }
+
+    document.querySelectorAll('.product-card img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    });
+    if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    // optional: click overlay to close when clicking outside image
+    if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+    renderCart();
+  })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
