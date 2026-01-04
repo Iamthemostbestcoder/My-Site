@@ -144,28 +144,7 @@
     .sold-out{ color:#e11d48; font-weight:700; margin-top:8px }
     .sold-alert{ color:#e11d48; font-weight:700; margin-top:8px }
 
-.navbar {
-  background-color: gold;
-  padding: 15px;
-  display: flex;
-  flex-wrap: wrap;         
-  justify-content: center;  
-  gap: 12px;                
-}
-
-.navbar a {
-  text-decoration: none;
-  color: white;
-  background-color: rgb(10, 170, 250);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 16px;
-  white-space: nowrap;      
-}
-
-.navbar a:hover {
-  background-color: rgb(0, 140, 220);
-}
 
 
  
+
