@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0"> 
+</head>
+
+  <title>My Shopping Website</title>
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body>
+  <header class="header">
+    <img src="image/Logo.jpg" width="200" alt="Logo">
+    <h1>Welcome to My Shop</h1> 
+    <p>Hope you find something you like! 100% authentic items on sale.If you find anything interesting that you want to purchase, please email Som: somsays.shopping@gmail.com</p>
+    <nav style="background-color: gold;padding: 20px;">
+    <a href="index.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">All</a>
+     <a href="bag.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Bag</a>
+       <a href="Earrings.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Earrings</a>
+        <a href="MakeupandSkincare.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Makeup Brushes</a>
+         <a href="Clothes.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Clothes</a>
+          <a href="Shoes.html" style="color:#fff6f6;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Shoes</a>
+              <a href="Necklace.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Necklace</a>
+                  <a href="Braclet.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Braclet</a>
+    </nav>
+    </header>
+      <section class="products">
+ <div class="product-card" data-retail="59">
+      <img src="image/watch.jpeg" alt="Watch Set" />
+      <h2>Watch & Bracelet Set</h2>
+      <p class="description">Watch with matching accessories</p>
+      <p class="price">$30</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+ <div class="product-card" data-retail="45">
+  <img src="image/Clover Braclet.jpeg" alt="Clover Bracelet" />
+  <h2>Clover Bracelet</h2>
+  <p class="description">Elegant clover bracelet with gold finish</p>
+  <p class="price">$20</p>
+  <button class="add-to-cart">Add to Cart</button>
+</div>
+    </section>
+    <footer class="footer">
+    <p>If you are interested to purchase, please email Som: somsays.shopping@gmail.com</p>
+    <p>Additional shipping costs apply</p>
+    <p>Shopwithsom is not affiliated with any of the brands. Brands reserve all copyrights and trademarks.</p>
+    <a href="https://www.instagram.com/shopwithsom" style="color: yellow;">FOLLOW US On Instagram</a>
+  </footer>
+     <!-- Cart button and drawer -->
+  <div class="cart-button" id="cartButton" aria-label="Open cart">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6h15l-1.5 9h-11L6 6z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div>Cart</div>
+    <div class="cart-count" id="cartCount">0</div>
+  </div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <button class="btn-small" id="closeCart">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <p style="margin:8px 0;">Total: <strong id="cartTotal">$0.00</strong></p>
+      <p style="margin:6px 0;">You save: <strong id="cartSavings">$0.00</strong></p>
+      <button class="btn-continue" id="checkoutBtn">Continue to Purchase</button>
+    </div>
+  </aside>
+
+  <!-- Lightbox markup -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightboxClose" class="btn-small" aria-label="Close image" title="Close">✕</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <style>
+    .lightbox{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.75); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:1300 }
+    .lightbox.open{ opacity:1; pointer-events:auto }
+    .lightbox img{ max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 18px 50px rgba(0,0,0,0.6); }
+    #lightboxClose{ position:fixed; right:22px; top:18px; background:transparent; color:#fff; border:0; font-size:20px; cursor:pointer }
+  </style>
+
+  <script>
+  (function(){
+    const CART_KEY = 'shopping_site_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    function save() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function formatPrice(n){ return '$' + n.toFixed(2); }
+    function getPriceFromText(text){ return parseFloat((text||'').replace(/[^0-9.]/g,'')) || 0; }
+
+    function computeRetail(price){
+      // If we later add real retail lookup results to the product element (data-retail), code can use that.
+      return Math.round(price * 1.25 * 100) / 100; // default: 25% higher than sale price
+    }
+
+    // Insert retail price into each product card UI (skip items marked data-no-retail)
+    document.querySelectorAll('.product-card').forEach(card => {
+      const priceEl = card.querySelector('.price');
+      if(!priceEl) return;
+      const raw = priceEl.innerText || '';
+      const price = getPriceFromText(raw);
+      const noRetail = card.hasAttribute('data-no-retail');
+      if(noRetail) return; // leave plain price for items without retail
+      const retailAttr = card.getAttribute('data-retail');
+      const retail = retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price);
+      // build price row if not already built
+      if(!card.querySelector('.price-row')){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'price-row';
+        const retailSpan = document.createElement('span');
+        retailSpan.className = 'retail-price';
+        retailSpan.textContent = formatPrice(retail);
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'price';
+        priceSpan.textContent = raw;
+        wrapper.appendChild(retailSpan);
+        wrapper.appendChild(priceSpan);
+        priceEl.replaceWith(wrapper);
+      }
+    });
+
+    function renderCart(){
+      const countEl = document.getElementById('cartCount');
+      const itemsEl = document.getElementById('cartItems');
+      const totalEl = document.getElementById('cartTotal');
+      const savingsEl = document.getElementById('cartSavings');
+      if(!countEl || !itemsEl || !totalEl) return;
+      countEl.textContent = String(cart.length);
+      itemsEl.innerHTML = '';
+      let total = 0;
+      let totalSavings = 0;
+      cart.forEach((it, i) => {
+        total += it.price;
+        const noRetail = !!it.noRetail;
+        let retail = 0;
+        let saving = 0;
+        if(!noRetail){
+          retail = (typeof it.retail === 'number' && it.retail > 0) ? it.retail : computeRetail(it.price);
+          saving = Math.round((retail - it.price) * 100) / 100;
+          totalSavings += saving;
+        }
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        if(noRetail){
+          row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        } else {
+          row.innerHTML = `\n          <img src="${it.img}" alt="${it.title}">\n          <div class="meta">\n            <h4>${it.title}</h4>\n            <div class="price-row">\n              <span class="retail-price">${formatPrice(retail)}</span>\n              <span class="price">${formatPrice(it.price)}</span>\n            </div>\n            <p class=\"savings\">You save ${formatPrice(saving)}</p>\n          </div>\n          <div>\n            <button class="btn-small remove-btn" data-index="${i}">Remove</button>\n          </div>`;
+        }
+        itemsEl.appendChild(row);
+      });
+      totalEl.textContent = formatPrice(total);
+      if(savingsEl) savingsEl.textContent = formatPrice(totalSavings);
+      itemsEl.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = Number(e.currentTarget.dataset.index);
+          if (!isNaN(idx)) { cart.splice(idx,1); save(); renderCart(); }
+        });
+      });
+    }
+
+    // Toggle drawer
+    const cartButton = document.getElementById('cartButton');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const closeCart = document.getElementById('closeCart');
+    if(cartButton && cartDrawer){
+      cartButton.addEventListener('click', () => {
+        cartDrawer.classList.toggle('open');
+        cartDrawer.setAttribute('aria-hidden', String(!cartDrawer.classList.contains('open')));
+      });
+    }
+    if(closeCart && cartDrawer){
+      closeCart.addEventListener('click', () => { cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); });
+    }
+
+    // Add-to-cart buttons
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.currentTarget.closest('.product-card');
+        if(!card) return;
+        // if item is marked sold out, show alert and a temporary inline tag and do not add
+        const soldOut = card.hasAttribute('data-soldout');
+        if(soldOut){
+          alert('This item is sold out and cannot be added to the cart.');
+          // show a temporary inline alert tag if not already present
+          if(!card.querySelector('.sold-alert')){
+            const note = document.createElement('div');
+            note.className = 'sold-alert';
+            note.textContent = 'Sold out — cannot add to cart';
+            card.appendChild(note);
+            setTimeout(() => { if(note.parentNode) note.parentNode.removeChild(note); }, 3000);
+          }
+          return;
+        }
+        const title = card.querySelector('h2')?.innerText?.trim() || 'Item';
+        const priceText = card.querySelector('.price')?.innerText || '';
+        const price = getPriceFromText(priceText);
+        const img = card.querySelector('img')?.getAttribute('src') || '';
+        // allow manual retail override via data-retail attribute on card
+        const noRetail = card.hasAttribute('data-no-retail');
+        const retailAttr = card.getAttribute('data-retail');
+        const retail = noRetail ? undefined : (retailAttr ? (parseFloat(retailAttr) || computeRetail(price)) : computeRetail(price));
+        cart.push({ title, price, img, retail, noRetail });
+        save();
+        renderCart();
+        const orig = e.currentTarget.innerText;
+        e.currentTarget.innerText = 'Added ✓';
+        setTimeout(()=> e.currentTarget.innerText = orig, 1000);
+      });
+    });
+
+    // Checkout -> mailto with items and total
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if(checkoutBtn){
+      checkoutBtn.addEventListener('click', () => {
+        if(cart.length === 0){ alert('Your cart is empty'); return; }
+        alert('email somsays.shopping@gmail.com');
+      });
+    }
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt){
+      if(!lightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeLightbox(){
+      if(!lightbox) return;
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      lightboxImg.src = '';
+      document.removeEventListener('keydown', onKeydown);
+    }
+    function onKeydown(e){ if(e.key === 'Escape') closeLightbox(); }
+
+    document.querySelectorAll('.product-card img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    });
+    if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    // optional: click overlay to close when clicking outside image
+    if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+    renderCart();
+  })();
+  </script>
+    </body>
+</html>
