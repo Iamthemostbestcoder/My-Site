@@ -16,15 +16,51 @@
     <img src="image/Logo.jpg" width="200" alt="Logo">
    <h1>Welcome to My Shop</h1> 
     <p>Hope you find something you like! 100% authentic items on sale.If you find anything interesting that you want to purchase, please email Som: somsays.shopping@gmail.com</p>
-    <nav style="background-color: gold;padding: 20px;">
-    <a href="index.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">All</a>
-     <a href="bag.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Bag</a>
-       <a href="Earrings.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Earrings</a>
-        <a href="MakeupandSkincare.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Makeup Brushes</a>
-         <a href="Clothes.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Clothes</a>
-              <a href="Shoes.html" style="color:#fff6f6;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Shoes</a>
-              <a href="Necklace.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Necklace</a>
-                  <a href="Braclet.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Braclet</a>
+    <nav class="shop-nav">
+  <a href="index.html">All</a>
+  <a href="bag.html">Bag</a>
+  <a href="Earrings.html">Earrings</a>
+  <a href="MakeupandSkincare.html">Makeup Brushes</a>
+  <a href="Clothes.html">Clothes</a>
+  <a href="Shoes.html">Shoes</a>
+  <a href="Necklace.html">Necklace</a>
+  <a href="Braclet.html">Bracelet</a>
+</nav>
+
+<style>
+  .shop-nav {
+    background-color: gold;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .shop-nav a {
+    background-color: rgb(10, 170, 250);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* MOBILE OPTIMIZATION */
+  @media (max-width: 600px) {
+    .shop-nav a {
+      flex: 1 1 40%;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .shop-nav a {
+      flex: 1 1 100%;
+    }
+  }
+</style>
     </nav>
     </header>
   <section class="products">
@@ -369,6 +405,7 @@
   </script>
 </body>
 </html>
+
 
 
 
