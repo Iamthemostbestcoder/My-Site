@@ -5,160 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+<meta http-equiv="Expires" content="0"> 
+</head>
 
   <title>My Shopping Website</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #f0f4ff, #ffffff);
-    }
-
-  
-    .header {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    .header h1 {
-      margin-bottom: 10px;
-    }
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      padding: 30px;
-    }
-
-    .product-card {
-      background-color: white;
-      width: 260px;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    .product-card h2 {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-
-    .description {
-      min-height: 40px;
-      color: #555;
-    }
-
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      color: #667eea;
-      margin: 10px 0;
-    }
-
-    button {
-      background: linear-gradient(135deg, #ff6a00, #ee0979);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    button:hover {
-      opacity: 0.9;
-    }
-    .footer {
-      text-align: center;
-      padding: 15px;
-      background: linear-gradient(135deg, #764ba2, #667eea);
-      color: white;
-    }
-    /* Cart styles */
-    .cart-button {
-      position: fixed;
-      right: 20px;
-      bottom: 30px;
-      background: linear-gradient(135deg,#ff6a00,#ee0979);
-      color: white;
-      border-radius: 50px;
-      padding: 12px 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 1200;
-    }
-    .cart-count {
-      background: #fff;
-      color: #333;
-      border-radius: 12px;
-      padding: 4px 8px;
-      font-weight: bold;
-      font-size: 13px;
-    }
-    .cart-drawer {
-      position: fixed;
-      right: 0;
-      top: 0;
-      height: 100vh;
-      width: 360px;
-      max-width: 95vw;
-      background: linear-gradient(180deg,#ffffff,#f7f9ff);
-      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-      transform: translateX(100%);
-      transition: transform 0.35s ease;
-      z-index: 1100;
-      display: flex;
-      flex-direction: column;
-      padding: 18px;
-    }
-    .cart-drawer.open { transform: translateX(0); }
-    .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-    .cart-items { overflow:auto; flex:1; padding-right:6px; }
-    .cart-item { display:flex; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid #eef2ff; }
-    .cart-item img{ width:64px; height:64px; object-fit:cover; border-radius:8px; }
-    .cart-item .meta{ flex:1; }
-    .cart-item .meta h4{ margin:0; font-size:14px; }
-    .cart-item .meta p{ margin:4px 0 0; color:#666; font-size:13px }
-    .cart-footer{ padding-top:10px; border-top:1px dashed #e6e9ff; }
-    .btn-continue{ width:100%; background:#667eea; color:white; border:none; padding:12px; border-radius:8px; font-weight:600; cursor:pointer; }
-    .btn-small{ background:transparent; border:none; color:#667eea; cursor:pointer; }
-    /* Retail and savings */
-    .price-row{ display:flex; align-items:center; justify-content:center; gap:8px }
-    .retail-price{ text-decoration:line-through; color:#999; font-size:14px }
-    .savings{ color:#16a34a; font-weight:700; font-size:13px }
-    .sold-out{ color:#e11d48; font-weight:700; margin-top:8px }
-    .sold-alert{ color:#e11d48; font-weight:700; margin-top:8px }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="header">
     <img src="image/Logo.jpg" width="200" alt="Logo">
-    <nav>
-    <h1>Welcome to My Shop</h1> 
+   <h1>Welcome to My Shop</h1> 
     <p>Hope you find something you like! 100% authentic items on sale.If you find anything interesting that you want to purchase, please email Som: somsays.shopping@gmail.com</p>
+    <nav style="background-color: gold;padding: 20px;">
+    <a href="index.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">All</a>
+     <a href="bag.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Bag</a>
+       <a href="Earrings.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Earrings</a>
+        <a href="MakeupandSkincare.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Makeup Brushes</a>
+         <a href="Clothes.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Clothes</a>
+              <a href="Shoes.html" style="color:#fff6f6;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Shoes</a>
+              <a href="Necklace.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Necklace</a>
+                  <a href="Braclet.html" style="color:#ffffff;margin-left:15px;background-color: rgb(10, 170, 250);padding: 10px; width: 50px;border-radius: 10px;">Braclet</a>
     </nav>
     </header>
   <section class="products">
@@ -259,7 +125,6 @@
   <p class="price">$20</p>
   <button class="add-to-cart">Add to Cart</button>
 </div>
-
       <div class="product-card" data-retail="310">
           <img src="image/BAAAG.jpeg" alt="Bag" />
           <h2>Tory Burch Bag </h2>
@@ -504,7 +369,6 @@
   </script>
 </body>
 </html>
-
 
 
 
